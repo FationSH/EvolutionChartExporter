@@ -11,5 +11,5 @@ Features
 ![alt tag](https://github.com/FationSH/EvolutionChartExporter/blob/main/screenshot/18F__rdbms-subsetter_CommitSummary.png)
 <br/><br/>
 
-![alt tag](https://github.com/FationSH/EvolutionChartExporter/blob/main/screenshot/3ev__tev_label_CommitSummary.png)
+![alt tag](https://github.com/FationSH/EvolutionChartExporter/blob/main/screenshot/sum_18F__rdbms-subsetter_CommitSummary.png)
 <br/><br/>
