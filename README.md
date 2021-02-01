@@ -8,4 +8,8 @@ Features
 - Sum number of affected files over month
 - Create plots over real time (zero values for periods with no commits)
 
-[![ScreenShot](https://github.com/FationSH/EvolutionChartExporter/blob/main/screenshot/18F__rdbms-subsetter_CommitSummary.png]
+![alt tag](https://github.com/FationSH/EvolutionChartExporter/blob/main/screenshot/18F__rdbms-subsetter_CommitSummary.png)
+<br/><br/>
+
+![alt tag](https://github.com/FationSH/EvolutionChartExporter/blob/main/screenshot/3ev__tev_label_CommitSummary.png)
+<br/><br/>
