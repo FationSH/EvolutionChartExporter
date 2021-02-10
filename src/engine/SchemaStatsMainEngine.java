@@ -65,7 +65,7 @@ public class SchemaStatsMainEngine {
 		emYAttributes.add("NumAffectedFiles");
 		emYAttributes.add("Contains .sql");
 		BarChartExporter barChartExporter = new BarChartExporter("figures/"+fileName.replace(".tsv", "")+".png",
-							fileName+":\nSoftWare & Schema Evolution over Time(versionID)",
+							fileName+":\nOccurrences of file changes\nSoftWare(src) VS Schema Evolution(sql) over Time(versionID)",
 							(HashMap)hashmapInputTupleCollection, "Date", emYAttributes, attributePositions, stage);
 		
 		try {

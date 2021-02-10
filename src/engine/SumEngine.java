@@ -7,7 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,12 +68,16 @@ public class SumEngine {
 				if (!tmp.getAuthor().contains(prj.getAuthor())){
 					tmp.setAuthor(tmp.getAuthor()+","+prj.getAuthor());
 				}
-				tmp.setNumAffectedFiles(tmp.getNumAffectedFiles()+prj.getNumAffectedFiles());
+				// NumAffectedFiles contains #src + #sql affected files
+				// Add number of affected files and subtract number of .sql files
+				tmp.setNumAffectedFiles(tmp.getNumAffectedFiles()+prj.getNumAffectedFiles() - prj.getContainsSQL());
 				tmp.setContainsSQL(tmp.getContainsSQL()+prj.getContainsSQL());
 				
 				sumHashMap.put(date, tmp);
 				
 			} else {
+				// NumAffectedFiles contains #src + #sql affected files => subtract #.sql files
+				prj.setNumAffectedFiles(prj.getNumAffectedFiles() - prj.getContainsSQL());
 				sumHashMap.put(date, prj);
 			}
 		}
