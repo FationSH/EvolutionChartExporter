@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	private static String filePath = "COMMIT_SUMMARIES_DETAILED";
-	private String[] fileNamesCom, folderNamesCom, fileNamesSum, figureNames;
+	private String[] fileNamesCom, folderNamesCom, fileNamesSum;
 	private ArrayList<String> folderNamesSum = new ArrayList<>();
 	
 	public static void main(String[] args){
