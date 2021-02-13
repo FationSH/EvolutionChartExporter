@@ -1,7 +1,9 @@
 package client;
 
 import java.io.File;
+import java.util.ArrayList;
 
+import engine.ProduceHTMLEngine;
 import engine.SchemaStatsMainEngine;
 import engine.SumEngine;
 import javafx.application.Application;
@@ -9,9 +11,9 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private static String filePathCom = "COMMIT_SUMMARIES_DETAILED";
-	private static String filePathSum = "COMMIT_SUMMARIES_DETAILED_months_sum";
-	private String[] fileNamesCom, fileNamesSum;
+	private static String filePath = "COMMIT_SUMMARIES_DETAILED";
+	private String[] fileNamesCom, folderNamesCom, fileNamesSum, figureNames;
+	private ArrayList<String> folderNamesSum = new ArrayList<>();
 	
 	public static void main(String[] args){
 
@@ -21,26 +23,60 @@ public class Main extends Application {
 	
 	public void start(Stage primaryStage) throws Exception {
 		
-		File f_com = new File(filePathCom);
-		File f_sum = new File(filePathSum);
+		File f_com = new File(filePath);
 		
-		fileNamesCom = f_com.list();  // file name for files with all commits
+		// Sum months and Create new .tsv files =================================================================
+		folderNamesCom = f_com.list();  // folder name for each taxon
 		
-		// Sum months and Create new .tsv files
-		for (String fileName : fileNamesCom) {
-			new SumEngine(filePathCom, fileName);
+		if(folderNamesCom != null) {
+			for (String folderName : folderNamesCom) {
+				File taxon = new File(filePath + File.separator + folderName);
+				fileNamesCom = taxon.list();  // file name for files with all commits in each taxon
+				
+				for (String fileName : fileNamesCom) {
+					new SumEngine(filePath + File.separator + folderName, fileName);
+				}
+			}
 		}
 		
 		
-		// Create figures for each project
-		fileNamesSum = f_sum.list();  // file name for files with summed commits
+		// Create figures for each project ======================================================================
 		
-		for (String fileName : fileNamesSum) {
-			SchemaStatsMainEngine engine = new SchemaStatsMainEngine(filePathSum, fileName, primaryStage);
-			// ++ Create figures with 0 values for months with no commits
-			engine.produceFigures();
+		// Find folders/taxons with summed .tsv files
+		String[] fileNames = f_com.list();  // file name for files with summed commits
+		if(fileNames != null) {
+			for (String folderName : fileNames) {
+				if (folderName.contains("_months_sum"))
+					folderNamesSum.add(folderName);
+			}
 		}
 		
+		// Create figures within each taxon
+		if(folderNamesSum != null) {
+			for (String folderName : folderNamesSum) {
+				File summedTaxon = new File(filePath + File.separator + folderName);
+				fileNamesSum = summedTaxon.list();  // file name for files with all summed commits in each taxon
+				
+				for (String fileName : fileNamesSum) {
+					SchemaStatsMainEngine engine = new SchemaStatsMainEngine(filePath + File.separator + folderName, fileName, primaryStage);
+					// ++ Create figures with 0 values for months with no commits
+					engine.produceFigures();
+				}
+			}
+		}
+		
+		
+		// Create HTML for each taxon ===========================================================================
+		if(folderNamesSum != null) {
+			for (String folderName : folderNamesSum) {
+				String figuresFolder = filePath + File.separator + folderName + File.separator + "figures";
+				
+				ProduceHTMLEngine produceHTMLEngine = new ProduceHTMLEngine(figuresFolder, folderName);
+				produceHTMLEngine.produceHTML();
+			}
+		}
+		
+
 		System.out.println("Finish");
 	}
 	

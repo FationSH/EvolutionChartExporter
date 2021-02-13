@@ -64,7 +64,9 @@ public class SchemaStatsMainEngine {
 		ArrayList<String> emYAttributes = new ArrayList<String>();  // add the attributes we want
 		emYAttributes.add("NumAffectedFiles");
 		emYAttributes.add("Contains .sql");
-		BarChartExporter barChartExporter = new BarChartExporter("figures/"+fileName.replace(".tsv", "")+".png",
+		
+		// Check if folder exist, else create it
+		BarChartExporter barChartExporter = new BarChartExporter(filePath+"/figures/"+fileName.replace(".tsv", "")+".png",
 							fileName+":\nOccurrences of file changes\nSoftWare(src) VS Schema Evolution(sql) over Time(versionID)",
 							(HashMap)hashmapInputTupleCollection, "Date", emYAttributes, attributePositions, stage);
 		
@@ -99,11 +101,10 @@ public class SchemaStatsMainEngine {
 	}
 	
 	public void setupFolders() {
-		
-		File testOutputFolder = new File("figures");
-		if (!testOutputFolder.exists()) {
-			testOutputFolder.mkdir();
-		}
+		File directory = new File(filePath + "/figures");
+		if (!directory.exists()){
+			directory.mkdir();
+	    }
 	}
 	
 }

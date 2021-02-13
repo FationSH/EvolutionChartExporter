@@ -1,5 +1,6 @@
 package engine;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +51,11 @@ public class SumEngine {
 		sumHashMap = new HashMap<Date, ProjectHistory>();
 		sumHashDate();
 		
-		// Write data
+		// Write data - if folder don't exist create it
+		File directory = new File(filePath + "_months_sum");
+		if (!directory.exists()){
+			directory.mkdir();
+	    }
 		PrintDataToTabDelimitedFile();
 	}
 	
@@ -92,6 +97,8 @@ public class SumEngine {
 		
         // Creating an ArrayList of values 
         sumObjCollection = new ArrayList<>(values);
+        
+        System.out.println("Commits summed successfully");
 	}
 	
 	
@@ -144,7 +151,7 @@ public class SumEngine {
 	
 	
 	private void PrintDataToTabDelimitedFile() {
-		String file = filePath + "_months_sum/sum_" + fileName;
+		String file = filePath + "_months_sum" + File.separator + "sum_" + fileName;
 		try {
 			// Tab delimited file will be written to data with the name tab-file.csv
 			FileWriter fos = new FileWriter(file);
@@ -156,7 +163,7 @@ public class SumEngine {
 				dos.print(format.format(prj.getDate())+"\t");
 				dos.print(prj.getAuthor()+"\t");
 				dos.print(prj.getNumAffectedFiles()+"\t");
-				dos.print(prj.getContainsSQL()+"\t");
+				dos.print(prj.getContainsSQL());
 				dos.println();
 			}
 			dos.close();
@@ -168,7 +175,7 @@ public class SumEngine {
 	
 	
 	private void loadHist() {
-		String file = filePath + "/" + fileName;
+		String file = filePath + File.separator + fileName;
 		try {
 			historyLoader.load(file, delimeter, hasHeaderLine, numFields);
 		} catch (Exception e) {

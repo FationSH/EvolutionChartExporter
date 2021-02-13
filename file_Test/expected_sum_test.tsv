@@ -1,9 +1,9 @@
 Date	Author	NumAffectedFiles	Contains .sql
-2010-01	ccc,aaa	7	4	
-2015-08	bbb	3	2	
-2015-09	ccc	7	1	
-2015-10	aaa,bbb	19	2	
-2017-01	ccc	3	1	
-2019-02	ddd	1	0	
-2019-04	ccc	0	1	
-2019-09	bbb,aaa	6	3	
+2010-01	ccc,aaa	7	4
+2015-08	bbb	3	2
+2015-09	ccc	7	1
+2015-10	aaa,bbb	19	2
+2017-01	ccc	3	1
+2019-02	ddd	1	0
+2019-04	ccc	0	1
+2019-09	bbb,aaa	6	3
