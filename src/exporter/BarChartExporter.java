@@ -79,7 +79,7 @@ public class BarChartExporter {
 		if (this.allSeries.size() == 0)
 			return;
 		
-		//EITHER the above, or the below
+		// EITHER the above, or the below
 		// TODO: change NumberAxis to show integer values & maybe manual scaling
 		final CategoryAxis xAxis = new CategoryAxis();
 		final NumberAxis yAxis = new NumberAxis();		

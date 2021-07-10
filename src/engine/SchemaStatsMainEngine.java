@@ -27,7 +27,7 @@ public class SchemaStatsMainEngine {
 	private static int numFields = 4;
 	private Stage stage;
 	
-	public SchemaStatsMainEngine(String filePath, String fileName, Stage stage ) {
+	public SchemaStatsMainEngine(String filePath, String fileName, Stage stage) {
 		this.filePath = filePath;
 		this.fileName = fileName;
 		this.stage = stage;
